@@ -1,0 +1,16 @@
+.container{
+  display: flex;
+  margin: auto;
+  margin-top: 40px;
+  gap: 20px;
+
+
+
+}
+
+@media screen and (max-width: 768px) {
+  .container{
+    flex-direction: column;
+  }
+
+}
