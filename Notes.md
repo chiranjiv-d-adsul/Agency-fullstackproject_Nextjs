@@ -41,3 +41,10 @@ if we dont want to cache data then
 ..
 {slug} it can take our query for example id
 from params we can reach slug
+
+
+<!-- install auth of this version because new one is unstable to define github and other profiles i get stuck on it for a while -->
+*
+npm install next-auth@5.0.0-beta.3
+*
+creating routes for auth is good and necessary to handle session

@@ -5,7 +5,8 @@ import Link from "next/link";
 import styles from "./links.module.css";
 import NavLink from "./navlinks/navLinks";
 import { useState } from "react";
-const Links = () => {
+import { handleLogout } from "@/lib/action";
+const Links =  ({session}) => {
 
   const navLink = [
 
@@ -16,9 +17,10 @@ const Links = () => {
 ];
 
 const [open, setOpen] = useState(false);
-// temporary session and isAdmin
-const session = true;
-const isAdmin = true;
+// // temporary session and isAdmin
+// const session = true;
+// const isAdmin = true;
+
 
   return (
     <div className={styles.container}>
@@ -27,12 +29,14 @@ const isAdmin = true;
         <NavLink item={link} key={link.title} />
       )))}{
         /*  id session is true and there is admin then only show admin link and logout*/
-        session ? (
+        session?.user ? (
           <>
-          { isAdmin && <NavLink item={{ title: "Admin", path: "/admin" }} />}
+          {session.user?.isAdmin && <NavLink item={{ title: "Admin", path: "/admin" }} />}
 
+            <form action={handleLogout}>
 
         <button  className={styles.logout}>Logout</button>
+            </form>
           </>
         ) :
         /* and if not show login button*/ (
