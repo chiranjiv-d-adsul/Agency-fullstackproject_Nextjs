@@ -142,6 +142,8 @@ export const login = async (prevState, formData) => {
 
   try {
     await signIn("credentials", { username, password });
+    revalidatePath("/admin");
+
   } catch (err) {
     console.log(err);
 
