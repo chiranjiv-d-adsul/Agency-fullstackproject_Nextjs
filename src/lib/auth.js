@@ -70,7 +70,7 @@ export const {
           return false;
         }
       }
-      return true;
+      return '/admin';
     },
     ...authConfig.callbacks,
   },
