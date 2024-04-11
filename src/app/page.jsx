@@ -2,6 +2,13 @@ import React from "react";
 import styles from "./homePage.module.css";
 import Image from "next/image";
 
+
+export const metadata = {
+  title: "Home Page",
+  description: "Home description",
+};
+
+
 const Home = () => {
   return (
     <div className={styles.container}>

@@ -5,7 +5,7 @@ const Footer = () => {
   return (
     <div className={styles.container}>
       <div className={styles.logo}>
-        <img src="/favicon.ico" alt="logo" />
+        <img src="/logo.svg" alt="logo" height={150} width={150} />
       </div>
       <div className={styles.textContainer}>
         Lorem, ipsum dolor sit amet consectetur adipisicing elit. Quisquam dolor

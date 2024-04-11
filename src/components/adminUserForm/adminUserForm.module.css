@@ -16,11 +16,12 @@
 }
 
 .container button {
-  padding: 20px;
+  padding: 12px;
   cursor: pointer;
   background-color: var(--btn);
   border: none;
   border-radius: 5px;
-  color: var(--textColor);
+  color: white;
   font-weight: bold;
+  width: 25%;
 }

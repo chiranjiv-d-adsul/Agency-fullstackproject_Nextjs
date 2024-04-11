@@ -16,9 +16,10 @@
 .logo{
   flex:1;
   width: 100px;
-  height: 100px;
+
   object-fit: contain;
   margin-right:20px ;
+
 }
 
 .text{
@@ -36,4 +37,12 @@
   height: 100%;
 
  }
+ .logo{
+  flex:1;
+  width: 100px;
+  height: 100px;
+  object-fit: contain;
+  margin-right: 50px;
+
+}
 }
