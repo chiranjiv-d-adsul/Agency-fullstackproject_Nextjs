@@ -4,14 +4,13 @@ import { revalidatePath } from "next/cache";
 import { Post, User } from "./models";
 import { connectToDb } from "./utils";
 import { signIn, signOut } from "./auth";
-// import bcrypt from "bcryptjs";
 
 export const addPost = async (prevState,formData) => {
   // const title = formData.get("title");
   // const desc = formData.get("desc");
   // const slug = formData.get("slug");
 
-  const { title, desc, slug, userId } = Object.fromEntries(formData);
+  const { title, desc, slug, userId,img } = Object.fromEntries(formData);
 
   try {
     connectToDb();
@@ -20,6 +19,7 @@ export const addPost = async (prevState,formData) => {
       desc,
       slug,
       userId,
+      img,
     });
 
     await newPost.save();
@@ -58,6 +58,7 @@ export const addUser = async (prevState,formData) => {
       email,
       password,
       img,
+
     });
 
     await newUser.save();
@@ -88,18 +89,16 @@ export const deleteUser = async (formData) => {
 export const handleGithubLogin = async () => {
   "use server";
   await signIn("github");
-  revalidatePath("/admin");
-
 };
 
 export const handleLogout = async () => {
   "use server";
   await signOut();
-  revalidatePath("/");
 };
 
-export const register = async (previousState, formData) => {
-  const { username, email, password, img, passwordRepeat } =
+export const register = async (prevState, formData) => {
+
+  const { username, email, password, img, passwordRepeat , userId } =
     Object.fromEntries(formData);
 
   if (password !== passwordRepeat) {
@@ -109,7 +108,7 @@ export const register = async (previousState, formData) => {
   try {
     connectToDb();
 
-    const user = await User.findOne({ username });
+    const user = await User.findOne({ username }) ;
 
     if (user) {
       return { error: "Username already exists" };
@@ -124,6 +123,8 @@ export const register = async (previousState, formData) => {
       // password: hashedPassword,
       password,
       img,
+      userId,
+
     });
 
     await newUser.save();

@@ -13,26 +13,25 @@ import Image from "next/image";
 //   return res.json();
 // };
 
-const PostUser = async ({id}) => {
+const PostUser = async ({ userId }) => {
   // FETCH DATA WITH AN API
   // const user = await getData(userId);
 
   // FETCH DATA WITHOUT AN API
-  const user = await getUser(id);
+  const user = await getUser(userId);
 
   return (
     <div className={styles.container}>
       <Image
         className={styles.avatar}
-        src={"/noavatar.png"}
+        src={ "/noavatar.png"}
         alt=""
         width={50}
         height={50}
-
       />
       <div className={styles.texts}>
         <span className={styles.title}>Author</span>
-        <span className={styles.username}>Chiranjiv</span>
+        <span className={styles.username}>chiranjiv</span>
       </div>
     </div>
   );

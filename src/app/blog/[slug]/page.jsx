@@ -1,6 +1,6 @@
 import Image from "next/image";
 import styles from "./post.module.css";
-import PostUser from "@/components/postUser/postUser";
+import PostUser from "@/components/postUser/postUser/";
 import { Suspense } from "react";
 import { getPost } from "@/lib/data";
 
@@ -43,7 +43,7 @@ const SinglePostPage = async ({ params }) => {
         </div>
       )}
       <div className={styles.textContainer}>
-        <h1 className={styles.title}>{post.title}</h1>
+        <h1 className={styles.title}>{post.title.toString().slice(0,30)}</h1>
         <div className={styles.detail}>
           {/* {post && ( */}
             <Suspense fallback={<div>Loading...</div>}>

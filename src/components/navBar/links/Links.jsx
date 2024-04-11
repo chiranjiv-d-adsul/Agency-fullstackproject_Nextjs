@@ -6,7 +6,7 @@ import styles from "./links.module.css";
 import NavLink from "./navlinks/navLinks";
 import { useState } from "react";
 import { handleLogout } from "@/lib/action";
-const Links =  ({session}) => {
+
 
   const navLink = [
 
@@ -15,6 +15,7 @@ const Links =  ({session}) => {
     { title: "Blog", path: "/blog" },
     { title: "Contact", path: "/contact" },
 ];
+const Links =  ({session}) => {
 
 const [open, setOpen] = useState(false);
 // // temporary session and isAdmin

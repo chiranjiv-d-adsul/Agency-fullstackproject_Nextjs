@@ -31,10 +31,6 @@ const userSchema = new mongoose.Schema(
 
 const postSchema = new mongoose.Schema(
   {
-    userId:{
-      type:String,
-      required:true,
-    },
     title: {
       type: String,
       required: true,

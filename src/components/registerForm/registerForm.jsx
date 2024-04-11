@@ -7,7 +7,7 @@ import { useEffect } from "react";
 import { useRouter } from "next/navigation";
 import Link from "next/link";
 
-const RegisterForm = () => {
+const RegisterForm = ({userId}) => {
   const [state, formAction] = useFormState(register, undefined);
 
   const router = useRouter();
@@ -18,6 +18,8 @@ const RegisterForm = () => {
 
   return (
     <form className={styles.form} action={formAction}>
+      <input type="hidden" name="userId" value={userId} />
+
       <input type="text" placeholder="username" name="username" />
       <input type="email" placeholder="email" name="email" />
       <input type="password" placeholder="password" name="password" />
