@@ -2,10 +2,11 @@ import NextAuth from "next-auth"
 import GitHub from "next-auth/providers/github"
 import { connectToDb } from "./utils";
 import { User } from "./models";
+import CredentialsProvider from "next-auth/providers/credentials"
 
 
 export const {
-   handlers:{GET,POST},
+   handlers:{ GET,POST },
     signIn,
     signOut,
     auth,
@@ -15,14 +16,19 @@ export const {
       clientId: process.env.AUTH_GITHUB_ID,
       clientSecret: process.env.AUTH_GITHUB_SECRET,
     }),
+    CredentialsProvider({
+        async authorize(credentials){
+
+        }
+    })
   ],
   callbacks:{
-    async signIn({User,account,profile}){
+    async signIn({user,account,profile}){
       // console.log(user,account,profile);
 
       console.log(profile);
       if(account.provider === "github"){
-        connectToDb()
+        connectToDb();
         try {
             const user  = await User.findOne({email: profile.email});
 
