@@ -1,3 +1,4 @@
+// import { cookies } from "next/headers";
 export const authConfig = {
   pages: {
     signIn: "/login",
@@ -9,11 +10,15 @@ export const authConfig = {
       if (user) {
         token.id = user.id;
         token.isAdmin = user.isAdmin;
+
       }
       return token;
+      // const headToken= cookies().set('myToken',token )
+      // return token;
     },
     async session({ session, token }) {
       if (token) {
+
         session.user.id = token.id;
         session.user.isAdmin = token.isAdmin;
       }
