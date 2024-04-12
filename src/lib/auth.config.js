@@ -42,6 +42,12 @@ export const authConfig = {
       if (isOnLoginPage && user) {
         return Response.redirect(new URL("/", request.nextUrl));
       }
+      
+     // REDIRECT TO THE BLOG PAGE AFTER SUCCESSFUL AUTHENTICATION
+
+  if (!isOnAdminPanel && !isOnBlogPage && !isOnLoginPage && user) {
+    return Response.redirect(new URL("/blog", request.nextUrl));
+  }
 
       return true
     },
