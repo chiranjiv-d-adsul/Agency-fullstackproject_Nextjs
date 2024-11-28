@@ -2,23 +2,36 @@ import Image from "next/image";
 import styles from "./post.module.css";
 import PostUser from "@/components/postUser/PostUser";
 import { Suspense } from "react";
-import { getPost } from "@/lib/data";
 
-// FETCH DATA WITH AN API
+export async function generateStaticParams() {
+  const start = performance.now();
+  const res = await fetch("https://agency-xi-one.vercel.app/api/blog");
+  const posts = await res.json();
+  const end = performance.now();
+  console.log("Static Params fetch time:", end - start, "ms");
+  return posts.map((post) => ({
+    slug: post.slug,
+  }));
+}
+
+// Fetch Data with an API
 const getData = async (slug) => {
+    const start = performance.now();
   const res = await fetch(`https://agency-xi-one.vercel.app/api/blog/${slug}`);
 
   if (!res.ok) {
     throw new Error("Something went wrong");
   }
-
-  return res.json();
+  const data = await res.json();
+  const end = performance.now();
+  console.log(`Fetch time for slug ${slug}:`, end - start, "ms");
+  return data;
 };
+
 
 export const generateMetadata = async ({ params }) => {
   const { slug } = params;
-
-  const post = await getPost(slug);
+  const post = await getData(slug);
 
   return {
     title: post.title,
@@ -28,34 +41,25 @@ export const generateMetadata = async ({ params }) => {
 
 const SinglePostPage = async ({ params }) => {
   const { slug } = params;
-
-  // FETCH DATA WITH AN API
   const post = await getData(slug);
-
-  // FETCH DATA WITHOUT AN API
-  // const post = await getPost(slug);
 
   return (
     <div className={styles.container}>
       {post.img && (
         <div className={styles.imgContainer}>
-          <Image src={post.img} alt="" fill className={styles.img} />
+          <Image src={post.img} alt={post.title} fill className={styles.img} />
         </div>
       )}
       <div className={styles.textContainer}>
-        <h1 className={styles.title}>{post.title.toString().slice(0,30)}</h1>
+        <h1 className={styles.title}>{post.title}</h1>
         <div className={styles.detail}>
-          {/* {post && ( */}
-            <Suspense fallback={<div>Loading...</div>}>
-              <PostUser userId={post.userId} />
-              {/* <PostUser  /> */}
-
-            </Suspense>
-          {/* )} */}
+          <Suspense fallback={<div>Loading...</div>}>
+            <PostUser userId={post.userId} />
+          </Suspense>
           <div className={styles.detailText}>
             <span className={styles.detailTitle}>Published</span>
             <span className={styles.detailValue}>
-              {post.createdAt.toString().slice(5, 16)}
+              {new Date(post.createdAt).toLocaleDateString()}
             </span>
           </div>
         </div>

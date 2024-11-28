@@ -4,7 +4,7 @@ import { getPosts } from "@/lib/data";
 
 // FETCH DATA WITH AN API
 const getData = async () => {
-  const res = await fetch("https://agency-xi-one.vercel.app/api/blog", {next:{revalidate:3600}});
+  const res = await fetch("https://agency-xi-one.vercel.app/api/blog");
 
   if (!res.ok) {
     throw new Error("Something went wrong");
